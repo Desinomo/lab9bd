@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Редагувати рейтинг{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold mb-6">Редагувати рейтинг</h1>
+    
+    <form method="POST" class="space-y-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Назва фільму</label>
+            <select name="movie_id" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                {% for movie in movies %}
+                <option value="{{ movie._id }}" {% if rating.movie_id == movie._id %}selected{% endif %}>
+                    {{ movie.title }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Користувач</label>
+            <select name="user_id" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                {% for user in users %}
+                <option value="{{ user._id }}" {% if rating.user_id == user._id %}selected{% endif %}>
+                    {{ user.name }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Рейтинг</label>
+            <select name="rating" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <option value="1" {% if rating.rating == 1 %}selected{% endif %}>1</option>
+                <option value="2" {% if rating.rating == 2 %}selected{% endif %}>2</option>
+                <option value="3" {% if rating.rating == 3 %}selected{% endif %}>3</option>
+                <option value="4" {% if rating.rating == 4 %}selected{% endif %}>4</option>
+                <option value="5" {% if rating.rating == 5 %}selected{% endif %}>5</option>
+            </select>
+        </div>
+        
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Коментар</label>
+            <textarea name="comment" rows="4" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">{{ rating.comment }}</textarea>
+        </div>
+        
+        <div class="flex justify-end space-x-4">
+            <a href="/ratings" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                Скасувати
+            </a>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Зберегти зміни
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

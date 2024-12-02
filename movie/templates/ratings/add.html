@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Додати рейтинг{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold mb-6">Додати рейтинг</h1>
+
+    <form method="POST" class="space-y-4">
+        <!-- Вибір фільму -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Фільм</label>
+            <select name="movie_id" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                {% for movie in movies %}
+                    <option value="{{ movie._id }}">{{ movie.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Вибір користувача -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Користувач</label>
+            <select name="user_id" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                {% for user in users %}
+                    <option value="{{ user._id }}">{{ user.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <!-- Рейтинг -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Рейтинг</label>
+            <select name="rating" required
+                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+
+        <!-- Коментар -->
+        <div>
+            <label class="block text-sm font-medium text-gray-700">Коментар</label>
+            <textarea name="comment" rows="4"
+                      class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"></textarea>
+        </div>
+
+        <div class="flex justify-end space-x-4">
+            <a href="/ratings" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                Скасувати
+            </a>
+            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+                Зберегти рейтинг
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

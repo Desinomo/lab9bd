@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Рейтинги{% endblock %}
+
+{% block content %}
+<div class="bg-white p-6 rounded-lg shadow-md">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-2xl font-bold">Рейтинги фільмів</h1>
+        <a href="/ratings/add" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
+            Додати рейтинг
+        </a>
+    </div>
+    
+    <div class="overflow-x-auto">
+        <table class="min-w-full">
+            <thead>
+                <tr class="bg-gray-50">
+                    <th class="px-6 py-3 text-left">Фільм</th>
+                    <th class="px-6 py-3 text-left">Користувач</th>
+                    <th class="px-6 py-3 text-left">Рейтинг</th>
+                    <th class="px-6 py-3 text-left">Коментар</th>
+                    <th class="px-6 py-3 text-left">Дії</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rating in ratings %}
+                <tr class="border-t">
+                    <td class="px-6 py-4">{{ rating.movie_title }}</td>
+                    <td class="px-6 py-4">{{ rating.user_name }}</td>
+                    <td class="px-6 py-4">{{ rating.rating }}</td>
+                    <td class="px-6 py-4">{{ rating.comment }}</td>
+                    <td class="px-6 py-4">
+                        <a href="/ratings/edit/{{ rating._id }}" class="text-blue-500 hover:text-blue-700 mr-2">
+                            Редагувати
+                        </a>
+                        <a href="/ratings/delete/{{ rating._id }}" class="text-red-500 hover:text-red-700"
+                           onclick="return confirm('Ви впевнені?')">
+                            Видалити
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
